@@ -1,0 +1,29 @@
+{
+  "name": "ndut-helper",
+  "version": "0.0.1",
+  "description": "Helper functions for Ndut Ecosystem",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ardhi/ndut-helper.git"
+  },
+  "keywords": [
+    "ndut",
+    "fastify",
+    "plugins",
+    "helper"
+  ],
+  "author": "Ardhi Lukianto <ardhi@lukianto.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ardhi/ndut-helper/issues"
+  },
+  "homepage": "https://github.com/ardhi/ndut-helper#readme",
+  "dependencies": {
+    "aneka": "0.0.8",
+    "lodash": "^4.17.21"
+  }
+}
