@@ -23,7 +23,8 @@
   },
   "homepage": "https://github.com/ardhi/ndut-helper#readme",
   "dependencies": {
-    "aneka": "0.0.8",
+    "aneka": "0.0.10",
+    "fast-glob": "^3.2.7",
     "lodash": "^4.17.21"
   }
 }
