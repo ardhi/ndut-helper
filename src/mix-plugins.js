@@ -1,11 +1,11 @@
 const { isString, findIndex } = require('lodash')
-const path = require('path')
+const pathResolve = require('aneka/src/fs/path-resolve')
 const requireAll = require('aneka/src/loader/require-all')
 
 module.exports = function (plugins = [], config = {}, deep = false) {
   for (let p of plugins) {
     if (isString(p)) p = { name: p }
-    if (p.name[0] === '.') p.name = path.resolve(p.name)
+    if (p.name[0] === '.') p.name = pathResolve(p.name)
     if (!p.disabled) {
       if (!p.module) p.module = deep ? requireAll(p.name) : require(p.name)
     }
