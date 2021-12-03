@@ -1,15 +1,15 @@
 const fg = require('fast-glob')
 const path = require('path')
 const pathResolve = require('aneka/src/fs/path-resolve')
-const { uniq, concat, isEmpty, intersection, isFunction } = require('lodash')
+const _ = require('lodash')
 
 const verbs = ['HEAD', 'GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
 
-module.exports = async function ({ dir = '', fastify, options = {} }) {
+module.exports = async function (fastify, dir = '', options = {}) {
   let baseDir
   if (!options.root) options.root = 'cwd'
   if (!options.prefix) options.prefix = '/'
-  if (isEmpty(dir)) throw new fastify.Boom.Boom('Directory to scan is not provided')
+  if (_.isEmpty(dir)) throw new fastify.Boom.Boom('Directory to scan is not provided')
   if (path.isAbsolute(dir)) baseDir = dir
   else if (options.root === 'cwd') baseDir = fastify.config.dir.base + '/' + dir
   else if (options.root === 'dataDir') baseDir = fastify.config.dir.data + '/' + dir
@@ -31,10 +31,10 @@ module.exports = async function ({ dir = '', fastify, options = {} }) {
     url = (options.prefix + url).replace(/\/\//g, '/')
     if (!paths[url]) paths[url] = []
     const method = path.basename(file, '.js').split('-').map(m => m.toUpperCase())
-    if (intersection(verbs, method).length > 0) {
-      const check = intersection(paths[url], method)
+    if (_.intersection(verbs, method).length > 0) {
+      const check = _.intersection(paths[url], method)
       if (check.length > 0) throw new fastify.Boom.Boom(`Method "${method.join('-')}" clashed with "${paths[url].join('-')}" in path "${url}"`)
-      paths[url] = uniq(concat(paths[url], method))
+      paths[url] = _.uniq(_.concat(paths[url], method))
       result.push({ file, url, method })
     }
   }
