@@ -11,5 +11,6 @@ const mod = { _, fastGlob, fs, aneka, fp, scramjet, JSONStream }
 mod.mixPlugins = require('./mix-plugins')
 mod.scanForRoutes = require('./scan-for-routes')
 mod.importFixture = require('./import-fixture')
+mod.getNdutConfig = require('./get-ndut-config')
 
 module.exports = mod

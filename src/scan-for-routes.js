@@ -9,6 +9,7 @@ module.exports = async function (fastify, dir = '', options = {}) {
   let baseDir
   if (!options.root) options.root = 'cwd'
   if (!options.prefix) options.prefix = '/'
+  if (options.prefix[0] !== '/') options.prefix = '/' + options.prefix
   if (_.isEmpty(dir)) throw new fastify.Boom.Boom('Directory to scan is not provided')
   if (path.isAbsolute(dir)) baseDir = dir
   else if (options.root === 'cwd') baseDir = fastify.config.dir.base + '/' + dir
@@ -31,11 +32,15 @@ module.exports = async function (fastify, dir = '', options = {}) {
     url = (options.prefix + url).replace(/\/\//g, '/')
     if (!paths[url]) paths[url] = []
     const method = path.basename(file, '.js').split('-').map(m => m.toUpperCase())
-    if (_.intersection(verbs, method).length > 0) {
+    let valid = true
+    _.each(method, m => {
+      if (!verbs.includes(m)) valid = false
+    })
+    if (valid && _.intersection(verbs, method).length > 0) {
       const check = _.intersection(paths[url], method)
       if (check.length > 0) throw new fastify.Boom.Boom(`Method "${method.join('-')}" clashed with "${paths[url].join('-')}" in path "${url}"`)
       paths[url] = _.uniq(_.concat(paths[url], method))
-      result.push({ file, url, method })
+      result.push({ prefix: options.prefix, file, url, method })
     }
   }
   return result
