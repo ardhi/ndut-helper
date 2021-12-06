@@ -7,9 +7,9 @@ const path = require('path')
 module.exports = async (file, handler, options) => {
   if (!handler) throw new Error('A function handler must be defined')
   const format = path.extname(file)
-  if (!['.json', '.jsonl'].includes(format)) throw new Error(`Invalid import format "${file}"`)
+  if (!['.json', '.jsonl'].includes(format)) throw new Error(`Invalid import format '${file}'`)
   const exists = await fs.pathExists(file)
-  if (!exists) throw new Error(`File not found "${file}"`)
+  if (!exists) throw new Error(`File not found '${file}'`)
   const reader = fs.createReadStream(file)
   let count = 0
   reader.on('error', err => {
