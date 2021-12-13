@@ -9,9 +9,10 @@ const JSONStream = require('JSONStream')
 
 const mod = { _, fastGlob, fs, aneka, fp, scramjet, JSONStream, luxon }
 
-mod.mixPlugins = require('./mix-plugins')
-mod.scanForRoutes = require('./scan-for-routes')
-mod.importFixture = require('./import-fixture')
-mod.getNdutConfig = require('./get-ndut-config')
+mod.mixPlugins = require('./lib/mix-plugins')
+mod.scanForRoutes = require('./lib/scan-for-routes')
+mod.importFixture = require('./lib/import-fixture')
+mod.getNdutConfig = require('./lib/get-ndut-config')
+mod.bind = require('./lib/bind')
 
 module.exports = mod
