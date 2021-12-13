@@ -13,6 +13,7 @@ mod.mixPlugins = require('./lib/mix-plugins')
 mod.scanForRoutes = require('./lib/scan-for-routes')
 mod.importFixture = require('./lib/import-fixture')
 mod.getNdutConfig = require('./lib/get-ndut-config')
+mod.parseQsForList = require('./lib/parse-qs-for-list')
 mod.bind = require('./lib/bind')
 
 module.exports = mod
